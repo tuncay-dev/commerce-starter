@@ -2,20 +2,15 @@
   <div>
     <h1>{{ merchant.business_name }}</h1>
 
-    <h3><n-link to="/categories">Categories</n-link></h3>
+    <h3>
+      <n-link to="/categories">Categories</n-link>
+    </h3>
 
-    <li :key="category.slug" v-for="category in categories">
-      <n-link
-        :to="{
-          name: 'categories-slug',
-          params: { slug: category.slug }
-        }"
-      >
-        {{ category.name }}
-      </n-link>
-    </li>
+    <category-list :categories="categories"></category-list>
 
-    <h3><n-link to="/products">Products</n-link></h3>
+    <h3>
+      <n-link to="/products">Products</n-link>
+    </h3>
 
     <product-list :products="products"></product-list>
   </div>
@@ -23,6 +18,7 @@
 
 <script>
 import commercejs from "~/common/commerce.js";
+import CategoryList from "@/components/CategoryList";
 import ProductList from "@/components/ProductList";
 
 export default {

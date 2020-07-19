@@ -2,22 +2,13 @@
   <div>
     <h1>Categories</h1>
 
-    <ul></ul>
-    <li v-for="category in categories" :key="category.slug">
-      <n-link
-        :to="{
-          name: 'categories-slug',
-          params: { slug: category.slug }
-        }"
-      >
-        {{ category.name }}
-      </n-link>
-    </li>
+    <category-list :categories="categories"></category-list>
   </div>
 </template>
 
 <script>
 import commercejs from "~/common/commerce.js";
+import CategoryList from "@/components/CategoryList";
 
 export default {
   async asyncData() {
