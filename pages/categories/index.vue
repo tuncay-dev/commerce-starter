@@ -7,16 +7,15 @@
 </template>
 
 <script>
-import commercejs from "~/common/commerce.js";
-import CategoryList from "@/components/CategoryList";
+import commerce from "~/common/commerce.js";
 
 export default {
   async asyncData() {
-    const { data: categories } = await commercejs.categories.list();
+    const { data: categories } = await commerce.categories.list();
 
     return {
-      categories
+      categories,
     };
-  }
+  },
 };
 </script>

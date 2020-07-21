@@ -17,21 +17,19 @@
 </template>
 
 <script>
-import commercejs from "~/common/commerce.js";
-import CategoryList from "@/components/CategoryList";
-import ProductList from "@/components/ProductList";
+import commerce from "~/common/commerce.js";
 
 export default {
   async asyncData() {
-    const merchant = await commercejs.merchants.about();
-    const { data: categories } = await commercejs.categories.list();
-    const { data: products } = await commercejs.products.list();
+    const merchant = await commerce.merchants.about();
+    const { data: categories } = await commerce.categories.list();
+    const { data: products } = await commerce.products.list();
 
     return {
       merchant,
       categories,
-      products
+      products,
     };
-  }
+  },
 };
 </script>

@@ -6,19 +6,19 @@
 </template>
 
 <script>
-import commercejs from "~/common/commerce.js";
+import commerce from "~/common/commerce.js";
 
 export default {
   async asyncData({ params }) {
     const { permalink } = params;
 
-    const product = await commercejs.products.retrieve(permalink, {
-      type: "permalink"
+    const product = await commerce.products.retrieve(permalink, {
+      type: "permalink",
     });
 
     return {
-      product
+      product,
     };
-  }
+  },
 };
 </script>

@@ -4,7 +4,7 @@
       <n-link
         :to="{
           name: 'products-permalink',
-          params: { permalink: product.permalink }
+          params: { permalink: product.permalink },
         }"
       >
         <product v-bind:product="product"></product>
@@ -14,9 +14,7 @@
 </template>
 
 <script>
-import Product from "~/components/Product";
-
 export default {
-  props: ["products"]
+  props: ["products"],
 };
 </script>

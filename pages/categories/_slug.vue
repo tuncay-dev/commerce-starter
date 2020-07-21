@@ -7,24 +7,23 @@
 </template>
 
 <script>
-import commercejs from "~/common/commerce.js";
-import ProductList from "@/components/ProductList";
+import commerce from "~/common/commerce.js";
 
 export default {
   async asyncData({ params }) {
     const { slug } = params;
 
-    const category = await commercejs.categories.retrieve(slug, {
-      type: "slug"
+    const category = await commerce.categories.retrieve(slug, {
+      type: "slug",
     });
-    const { data: products } = await commercejs.products.list({
-      category_slug: slug
+    const { data: products } = await commerce.products.list({
+      category_slug: slug,
     });
 
     return {
       category,
-      products
+      products,
     };
-  }
+  },
 };
 </script>

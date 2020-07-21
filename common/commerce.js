@@ -1,7 +1,5 @@
 import CommerceSDK from "@chec/commerce.js";
 
-const client = new CommerceSDK(
-  "pk_184625ed86f36703d7d233bcf6d519a4f9398f20048ec"
-);
+const client = new CommerceSDK(process.env.NUXT_ENV_CHEC_PUBLIC_API_KEY);
 
 export default client;
