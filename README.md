@@ -14,7 +14,7 @@ This repo contains all of the code necessary to create a commerce store with Nux
 
 ## Build it with me
 
-Before you start, you'll want to create an account at [Chec](https://commerce.com) or use the [CLI](https://github.com/chec/cli).
+Before you start, you'll want to create an account at [Chec](https://commercejs.com) or use the [CLI](https://github.com/chec/cli).
 
 You'll also need to create a few categories, that have products to get the most out of this tutorial. Once you've done that, grab a copy of your public API key. You can find this at [Chec Dashboard > Developer Settings](https://dashboard.chec.io/settings/developer).
 
@@ -54,7 +54,7 @@ NUXT_ENV_CHEC_PUBLIC_API_KEY=...
 
 We'll now instantiate a new `@chec/commerce.js` instance that we can use throughout our application.
 
-Inside a new directory `common`, create the file `commerce.js`. Inside here we'll export a new instance of `@chec/commerce.js`, following the [Commerce.js Docs](https://commerce.com/docs/api/#authentication).
+Inside a new directory `common`, create the file `commerce.js`. Inside here we'll export a new instance of `@chec/commerce.js`, following the [Commerce.js Docs](https://commercejs.com/docs/api/#authentication).
 
 ```vue
 // common/commerce.js import CommerceSDK from "@chec/commerce.js"; const client
@@ -363,3 +363,94 @@ export default {
 ```
 
 ### 10. Create individual category page
+
+Since we're linking to the individual category pages inside the `category-list` component, let's now create pages for each of those categories, programmatically!
+
+We can use the built-in Nuxt.js router to handle requests that go to `/categories/:slug`.
+
+Inside the `pages/categories` directory, create a file `_slug.vue` - including the square brackets.
+
+Automatically Nuxt.js will treat anything after `/categories/` as the `slug`, and provide it to the `asyncData` method as `params`.
+
+Inside `pages/categories/_slug.vue`, let's destructure the `slug` from `params`, and make a request to Commerce.js for our individual category.
+
+To do this, we can provide the `slug` to Commerce.js so we [filter](https://commercejs.com/docs/api/#list-all-categories) [accordingly](https://commercejs.com/docs/api/#retrieve-category).
+
+Let's also get all `products` inside the current category. We can do this by filtering our products by passing a `category_slug.`
+
+```vue
+// pages/categories/_slug.vue
+<script>
+import commerce from "~/common/commerce.js";
+
+export default {
+  async asyncData({ params }) {
+    const { slug } = params;
+
+    const category = await commerce.categories.retrieve(slug, {
+      type: "slug",
+    });
+    const { data: products } = await commerce.products.list({
+      category_slug: slug,
+    });
+
+    return {
+      category,
+      products,
+    };
+  },
+};
+</script>
+```
+
+Now let's add the template to render our category, and product list:
+
+```vue
+// pages/categories/_slug.vue
+<template>
+  <div>
+    <h1>{{ category.name }}</h1>
+
+    <product-list :products="products"></product-list>
+  </div>
+</template>
+```
+
+### 11. Create product page
+
+In the exact same way we did for our category page, let's now handle requests to `/products/:permalink`.
+
+Inside `pages/products`, create a new file `_permalink.vue`, and add the following:
+
+```vue
+<template>
+  <div>
+    <h1>{{ product.name }}</h1>
+    <p>{{ product.price.formatted_with_symbol }}</p>
+  </div>
+</template>
+
+<script>
+import commerce from "~/common/commerce.js";
+
+export default {
+  async asyncData({ params }) {
+    const { permalink } = params;
+
+    const product = await commerce.products.retrieve(permalink, {
+      type: "permalink",
+    });
+
+    return {
+      product,
+    };
+  },
+};
+</script>
+```
+
+All that's different here is we are retrieving our product by `permalink`, which is given to use by the `params` object inside `asyncData`.
+
+### 12. Run it locally
+
+That's it! Now you're ready to go! Type `npm run dev` in your Terminal, and head to the local port to browse your Nuxt.js powered commerce site.
