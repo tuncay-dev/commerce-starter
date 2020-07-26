@@ -453,4 +453,6 @@ All that's different here is we are retrieving our product by `permalink`, which
 
 ### 12. Run it locally
 
-That's it! Now you're ready to go! Type `npm run dev` in your Terminal, and head to the local port to browse your Nuxt.js powered commerce site.
+That's it!
+
+Now you're ready to go! Type `npm run dev` in your Terminal, and head to the local port to browse your Nuxt.js powered commerce site.
