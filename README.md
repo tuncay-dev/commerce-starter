@@ -50,6 +50,21 @@ Now create a new file `.env` and add your public API key here.
 NUXT_ENV_CHEC_PUBLIC_API_KEY=...
 ```
 
+For the purposes of this tutorial, we'll create a barebones `nuxt.config.js` file in the root of our directory, and add the following:
+
+```js
+export default {
+  mode: "universal",
+  target: "static",
+  css: [],
+  plugins: [],
+  components: true,
+  buildModules: ["@nuxtjs/dotenv"],
+  modules: [],
+  build: {},
+};
+```
+
 ### 2. Create a Commerce.js instance
 
 We'll now instantiate a new `@chec/commerce.js` instance that we can use throughout our application.
