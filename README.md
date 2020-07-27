@@ -71,10 +71,13 @@ We'll now instantiate a new `@chec/commerce.js` instance that we can use through
 
 Inside a new directory `common`, create the file `commerce.js`. Inside here we'll export a new instance of `@chec/commerce.js`, following the [Commerce.js Docs](https://commercejs.com/docs/api/#authentication).
 
-```vue
-// common/commerce.js import CommerceSDK from "@chec/commerce.js"; const client
-= new CommerceSDK(process.env.NUXT_ENV_CHEC_PUBLIC_API_KEY); export default
-client;
+```js
+// common/commerce.js
+import CommerceSDK from "@chec/commerce.js";
+
+const client = new CommerceSDK(process.env.NUXT_ENV_CHEC_PUBLIC_API_KEY);
+
+export default client;
 ```
 
 ### 3. Create homepage of categories and products
