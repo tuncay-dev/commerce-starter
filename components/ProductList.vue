@@ -7,7 +7,7 @@
           params: { permalink: product.permalink },
         }"
       >
-        <product v-bind:product="product"></product>
+        <product-view :product="product"></product-view>
       </n-link>
     </li>
   </ul>

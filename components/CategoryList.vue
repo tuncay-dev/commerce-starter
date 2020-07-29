@@ -7,7 +7,7 @@
           params: { slug: category.slug },
         }"
       >
-        <category v-bind:category="category"></category>
+        <category-view :category="category"></category-view>
       </n-link>
     </li>
   </ul>

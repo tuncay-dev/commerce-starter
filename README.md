@@ -92,9 +92,9 @@ Inside `pages/index.js`, add the following:
 // pages/index.js
 <template>
   <div>
-    <pre>{JSON.stringify(merchant, null, 2)}</pre>
-    <pre>{JSON.stringify(categories, null, 2)}</pre>
-    <pre>{JSON.stringify(products, null, 2)}</pre>
+    <pre>{{ JSON.stringify(merchant, null, 2) }}</pre>
+    <pre>{{ JSON.stringify(categories, null, 2) }}</pre>
+    <pre>{{ JSON.stringify(products, null, 2) }}</pre>
   </div>
 </template>
 ```
@@ -134,12 +134,12 @@ export default {
 
 Since we'll be showing our products in more than one place throughout this example, we should probably create a component that takes care of showing our products.
 
-Inside a new directory called `components`, create the file `Product.vue`.
+Inside a new directory called `components`, create the file `ProductView.vue`.
 
 This file will take care of rendering our product, and all it will do is return our `name`, and `price.formatted_with_symbol`.
 
 ```vue
-// components/Product.vue
+// components/ProductView.vue
 <template>
   <p>{{ product.name }}: {{ product.price.formatted_with_symbol }}</p>
 </template>
@@ -166,7 +166,7 @@ Inside a new file `ProductList.vue` in the `components` directory, add the follo
           params: { permalink: product.permalink },
         }"
       >
-        <product v-bind:product="product"></product>
+        <product-view :product="product"></product-view>
       </n-link>
     </li>
   </ul>
@@ -185,8 +185,8 @@ In the template above, we're simply mapping over each of our `products` passed d
 
 Now let's update the index page to use the `ProductList` component. Inside `pages/index.js`...
 
-```js
-<pre>{JSON.stringify(products, null, 2)}</pre>
+```vue
+<pre>{{JSON.stringify(products, null, 2)}}</pre>
 ```
 
 With our new `ProductList` component:
@@ -233,7 +233,7 @@ Here we're making a request to Commerce.js for just our products, and rendering 
 
 Similar to how we created components for our `product-list`, and `product` component earlier, we'll now do the same for categories.
 
-Inside a new file `Category.vue` inside the `components` directory, add the following:
+Inside a new file `CategoryView.vue` inside the `components` directory, add the following:
 
 ```vue
 <template>
@@ -261,7 +261,7 @@ Next create `CategoryList.vue` inside `components`, and add the following:
           params: { slug: category.slug },
         }"
       >
-        <category v-bind:category="category"></category>
+        <category-view :category="category"></category-view>
       </n-link>
     </li>
   </ul>
@@ -314,8 +314,8 @@ Let's now update our index page to use the new `category-list` component.
 
 Inside `pages/index.vue`, where we have:
 
-```js
-<pre>{JSON.stringify(categories, null, 2)}</pre>
+```vue
+<pre>{{JSON.stringify(categories, null, 2)}}</pre>
 ```
 
 Replace it with:
@@ -328,8 +328,8 @@ Also inside this file, we'll replace the merchant information with our `business
 
 Find:
 
-```js
-<pre>{JSON.stringify(merchant, null, 2)}</pre>
+```vue
+<pre>{{JSON.stringify(merchant, null, 2)}}</pre>
 ```
 
 Replace with:
