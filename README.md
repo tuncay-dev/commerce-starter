@@ -64,7 +64,7 @@ We'll now instantiate a new `@chec/commerce.js` instance that we can use through
 Inside a new directory `common`, create the file `commerce.js`. Inside here we'll export a new instance of `@chec/commerce.js`, following the [Commerce.js Docs](https://commercejs.com/docs/api/#authentication).
 
 ```js
-// common/commerce.js
+// common/commerce
 import CommerceSDK from "@chec/commerce.js";
 
 const client = new CommerceSDK(process.env.NUXT_ENV_CHEC_PUBLIC_API_KEY);
@@ -74,14 +74,14 @@ export default client;
 
 ### 3. Create homepage of categories and products
 
-Inside of a new directory `pages`, create the file `index.js`.
+Inside of a new directory `pages`, create the file `index.vue`.
 
 We'll use this page to show information about our Commerce.js mercant account, categories, and products. We'll also link to each of our categories and products.
 
-Inside `pages/index.js`, add the following:
+Inside `pages/index.vue`, add the following:
 
 ```vue
-// pages/index.js
+// pages/index.vue
 <template>
   <div>
     <pre>{{ JSON.stringify(merchant, null, 2) }}</pre>
@@ -99,12 +99,12 @@ The `asyncData` will be ran on the server on the first request, and
 
 We will return the values of our requests to Commerce.js in a new object. These values are available to the `template` due to how Vue works under the hood.
 
-Below the `<template>` in `pages/index.js`, add the following:
+Below the `<template>` in `pages/index.vue`, add the following:
 
 ```vue
-// pages/index.js
+// pages/index.vue
 <script>
-import commerce from "~/common/commerce.js";
+import commerce from "~/common/commerce";
 
 export default {
   async asyncData() {
@@ -175,7 +175,7 @@ In the template above, we're simply mapping over each of our `products` passed d
 
 ### 5. Update index page to use `ProductList` component
 
-Now let's update the index page to use the `ProductList` component. Inside `pages/index.js`...
+Now let's update the index page to use the `ProductList` component. Inside `pages/index.vue`...
 
 ```vue
 <pre>{{JSON.stringify(products, null, 2)}}</pre>
@@ -205,7 +205,7 @@ Inside the `pages` directory, create a new folder `products`, and a new file `in
 </template>
 
 <script>
-import commerce from "~/common/commerce.js";
+import commerce from "~/common/commerce";
 
 export default {
   async asyncData() {
@@ -284,7 +284,7 @@ Inside the `pages` directory, create a new folder `categories`, and a new file `
 </template>
 
 <script>
-import commerce from "~/common/commerce.js";
+import commerce from "~/common/commerce";
 
 export default {
   async asyncData() {
@@ -354,7 +354,7 @@ Your updated `pages/index.vue` should now look something like:
 </template>
 
 <script>
-import commerce from "~/common/commerce.js";
+import commerce from "~/common/commerce";
 
 export default {
   async asyncData() {
@@ -391,7 +391,7 @@ Let's also get all `products` inside the current category. We can do this by fil
 ```vue
 // pages/categories/_slug.vue
 <script>
-import commerce from "~/common/commerce.js";
+import commerce from "~/common/commerce";
 
 export default {
   async asyncData({ params }) {
@@ -441,7 +441,7 @@ Inside `pages/products`, create a new file `_permalink.vue`, and add the followi
 </template>
 
 <script>
-import commerce from "~/common/commerce.js";
+import commerce from "~/common/commerce";
 
 export default {
   async asyncData({ params }) {

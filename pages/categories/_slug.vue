@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import commerce from "~/common/commerce.js";
+import commerce from "~/common/commerce";
 
 export default {
   async asyncData({ params }) {
