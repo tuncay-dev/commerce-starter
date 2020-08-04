@@ -54,14 +54,8 @@ For the purposes of this tutorial, we'll create a barebones `nuxt.config.js` fil
 
 ```js
 export default {
-  mode: "universal",
-  target: "static",
-  css: [],
-  plugins: [],
   components: true,
   buildModules: ["@nuxtjs/dotenv"],
-  modules: [],
-  build: {},
 };
 ```
 
