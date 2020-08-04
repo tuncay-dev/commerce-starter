@@ -12,8 +12,5 @@
   "dependencies": {
     "@chec/commerce.js": "^2.0.1",
     "nuxt": "^2.14.0"
-  },
-  "devDependencies": {
-    "@nuxtjs/dotenv": "^1.4.1"
   }
 }

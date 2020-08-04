@@ -29,7 +29,6 @@ To begin, inside a new directory, do the following:
 ```bash
 npm init -y
 npm install nuxt @chec/commerce.js
-npm install -D @nuxtjs/dotenv
 ```
 
 Open `package.json` and add the following `scripts`:
@@ -55,7 +54,6 @@ For the purposes of this tutorial, we'll create a barebones `nuxt.config.js` fil
 ```js
 export default {
   components: true,
-  buildModules: ["@nuxtjs/dotenv"],
 };
 ```
 
