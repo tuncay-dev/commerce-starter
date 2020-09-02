@@ -4,7 +4,7 @@ This repo contains all of the code necessary to create a commerce store with Nux
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/notrab/nuxtjs-commercejs-example)
 
-[![Codesandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/notrab/nuxtjs-commercejs-example)
+[![Codesandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/notrab/nuxtjs-commercejs-example/tree/main)
 
 ## Run this locally
 
