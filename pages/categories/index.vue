@@ -7,11 +7,9 @@
 </template>
 
 <script>
-import commerce from "~/common/commerce";
-
 export default {
-  async asyncData() {
-    const { data: categories } = await commerce.categories.list();
+  async asyncData({ $commerce }) {
+    const { data: categories } = await $commerce.categories.list();
 
     return {
       categories,
