@@ -17,13 +17,11 @@
 </template>
 
 <script>
-import commerce from "~/common/commerce";
-
 export default {
-  async asyncData() {
-    const merchant = await commerce.merchants.about();
-    const { data: categories } = await commerce.categories.list();
-    const { data: products } = await commerce.products.list();
+  async asyncData({ $commerce }) {
+    const merchant = await $commerce.merchants.about();
+    const { data: categories } = await $commerce.categories.list();
+    const { data: products } = await $commerce.products.list();
 
     return {
       merchant,
