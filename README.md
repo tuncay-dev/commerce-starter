@@ -461,7 +461,71 @@ export default {
 
 All that's different here is we are retrieving our product by `permalink`, which is given to use by the `params` object inside `asyncData`.
 
-### 12. Run it locally
+## 12. Create a Nuxt plugin for Commerce.js
+
+Now that we're making several imports of `~/common/commerce` inside out application, it's probably worthwhile making use of the Nuxt plugin ecosystem.
+
+Nuxt allows us to define to bind instances of external modules to the `Vue` context. This means we can instantiate Commerce.js, and bind it to `Vue` as `$commerce`.
+
+First, go ahead and rename the `common` folder to `plugins`, and update the code inside `plugins/commerce.js` to be:
+
+```js
+import CommerceSDK from "@chec/commerce.js";
+
+const commerce = new CommerceSDK(process.env.NUXT_ENV_CHEC_PUBLIC_API_KEY);
+
+export default (_, inject) => {
+  inject("commerce", commerce);
+};
+```
+
+Then remove all occurrences of:
+
+```js
+import commerce from "~/common/commerce";
+```
+
+Inside the pages.
+
+Then all that's left to do is destructure `$commerce` from the first argument of all `asyncData` requests, and replace any calls to `commerce` with `$commerce`.
+
+To give you an example of how this looks, here is an updated `pages/index.vue` file:
+
+```js
+<template>
+  <div>
+    <h1>{{merchant.business_name}}</h1>
+    <h3>
+      <n-link to="/categories">Categories</n-link>
+    </h3>
+    <category-list :categories="categories"></category-list>
+    <h3>
+      <n-link to="/products">Products</n-link>
+    </h3>
+    <product-list :products="products"></product-list>
+  </div>
+</template>
+
+<script>
+export default {
+  async asyncData({ $commerce }) {
+    const merchant = await $commerce.merchants.about();
+    const { data: categories } = await $commerce.categories.list();
+    const { data: products } = await $commerce.products.list();
+
+    return {
+      merchant,
+      categories,
+      products,
+    };
+  },
+};
+</script>
+```
+
+Make sure you do this for every `pages/*.js` file you use `asyncData`.
+
+## 13. Run it locally
 
 That's it!
 
