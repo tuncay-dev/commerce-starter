@@ -11,6 +11,6 @@
   },
   "dependencies": {
     "@chec/commerce.js": "^2.0.1",
-    "nuxt": "^2.14.0"
+    "nuxt": "^3.7.4"
   }
 }
